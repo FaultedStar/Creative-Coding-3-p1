@@ -49,7 +49,8 @@ function draw () {
     ellipse(width/2, height/2, headsize, headsize);
     fill(0);
     //eyes
-    fill( '#b35900');
+    
+    fill( '#4d79ff');
     eye_value = eye_slider.value();
     if (eye_value === 1 || eye_value == 3) {
     	ellipse(width/2,height/2, 100,100);
@@ -60,8 +61,13 @@ function draw () {
     }
   
   //mouth
-  	 //arc(459, 485, 250, 220, TWO_PI, PI/2);
-  	// arc(width/2,height/2+80,50,50, -180, PI);
+  	noFill();
+    stroke(0);
+
+  	arc(width/2,height/2+100,60,50, 0, 90);
+    noStroke();
+    //nose
+    fill(0);
     triangle(noseloci, noseloci+100, noseloci+noseXoffset, noseloci+noseYoffset, noseloci-noseXoffset, noseloci+noseYoffset);
 
 
