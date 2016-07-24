@@ -4,13 +4,21 @@
 
 //slider things
 var main_canvas;
-var pettal_length_slide;
-var mouth_slider;
-var eye_size_slider;
-var eye_width_slider;
-var pettal_width_slide;
 
 
+
+//random seed
+var curRandomSeed;
+
+var randomEyeSize;
+var randomEyeWidth;
+var randomPettalLength;
+var randomPettalWidth;
+var randomMouth
+
+function changeRandomSeed() {
+  curRandomSeed = curRandomSeed + 1;
+}
 
 //location stettings
 var startx;
@@ -36,21 +44,18 @@ function setup () {
  main_canvas = createCanvas(500, 500); 
    angleMode(DEGREES); // for the sliders, they like degrees (me too, id like mine now)
 
-   //make the slidys
-   pettal_length_slide = createSlider(50, 450, 250);
-   pettal_width_slide = createSlider(30, 150, 80);
-  mouth_slider = createSlider(0, 1, 0);
-  eye_size_slider = createSlider(30, 120, 70); 
-   eye_width_slider = createSlider(20, 100, 60);
 
+
+
+
+button = createButton('random');
+  button.mousePressed(randomThings);
+  button.position(10, 10);
+
+  
   // position each element on the page
   main_canvas.parent('canvasContainer');
-  mouth_slider.parent('slider1Container');
-  eye_size_slider.parent('slider2Container');
-  pettal_length_slide.parent('slider3Container');
-  pettal_width_slide.parent('slider4Container');
-  eye_width_slider.parent('slider5Container');
-
+  
 }
 
 function draw () {
@@ -58,19 +63,24 @@ function draw () {
 	background('#b3ffb3');
   startx = width/2;
   starty = width/2;
+//randomThings(); // this is just a setter
+  drawFace();
+
+}
+
+function drawFace(){
 drawPettal(startx, starty,pettalSpacing, pettalWidth, pettalLength, pettalColour);
 drawCenter(startx,starty,centerSize,centerColour);
 drawEyes(startx, starty,eyeWidth,eyeSize,eyeColour);
 drawStem(startx,starty,250,500, 60);
 drawMouth(startx,starty, eyeColour,fillMouth);
 drawKawaii();
-sliderUpdate(); // this is just a setter
 }
 
-function sliderUpdate(){
+function randomThings(){
 
-
-if(mouth_slider.value()>0){
+randomMouth = random(2);
+if(randomMouth>1){
 fillMouth = true;
 
 }
@@ -78,11 +88,12 @@ else{
 
 	fillMouth = false;
 }
-pettalLength = pettal_length_slide.value();
 
-eyeSize = eye_size_slider.value();
-eyeWidth = eye_width_slider.value();
-pettalWidth = pettal_width_slide.value();
+pettalLength = random(50, 450);
+
+eyeSize = random(30, 120);
+eyeWidth = random(20, 100);
+pettalWidth = random(30, 150);
 
 }
 

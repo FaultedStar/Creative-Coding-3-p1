@@ -1,0 +1,1 @@
+This is the style I like the most, its cute and chearful. Also all of the sliders work. gonna think about colours but this is the style I think I'll go for
