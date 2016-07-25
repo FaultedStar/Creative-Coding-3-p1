@@ -1,0 +1,2 @@
+First random test. I just subsituted what people could have added on the sliders with a random value. The value is only between the values that where presant on the slider.
+This is not true random, but it is very very caotic. I may work on a grid verson next where you can also change more values such as colour and "head size".
