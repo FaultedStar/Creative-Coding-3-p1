@@ -42,20 +42,11 @@ var eyeColour = '#bf8040';
 var fillMouth = false;
 
 
-
-
 var faces = [];
 var totalRows = 3;
 var totalCols = 5;
 
-//sway code
-var xspacing = 960/totalCols;    // Distance between each horizontal location
-var w;                // Width of entire wave
-var theta = 0.0;      // Start angle at 0
-var amplitude = 10.0; // Height of wave
-var period = 500.0;   // How many pixels before the wave repeats
-var dx;               // Value for incrementing x
-var yvalues;  // Using an array to store height values for the wave
+
 
 
 function setup () {
@@ -63,9 +54,6 @@ function setup () {
 
 
  main_canvas = createCanvas(960, 500); 
-  w = width+16;
-  dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
   angleMode(DEGREES); // for the sliders, they like degrees (me too, id like mine now)
 
 
@@ -125,32 +113,17 @@ function draw () {
 			i++;
 		}
 	}
-	calcSway();
 }
 
-function calcSway(){
 
-	angleMode(RADIANS);
-	// Increment theta (try different values for 
-  // 'angular velocity' here
-  theta += 0.01;
-
-  // For every x value, calculate a y value with sine function
-  var x = theta;
-  for (var i = 0; i < yvalues.length; i++) {
-    yvalues[i] = sin(x)*amplitude;
-    x+=dx;
-  }
-  angleMode(DEGREES);
-}
 
 function drawFace(x,y,i){
 	//uses i to find the correct index of the faces array, which holds a set amount of faces that are initialised in the setup method
-	drawPettal(startx+ yvalues[Math.floor(i/5)], starty + yvalues[Math.floor(i/5)], faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour); //remove the y
-	drawCenter(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],faces[i].centerSize,faces[i].centerColour);
-	drawEyes(startx+ yvalues[Math.floor(i/5)], starty+ yvalues[Math.floor(i/5)],faces[i].eyeWidth,faces[i].eyeSize,faces[i].eyeColour);
-	drawStem(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],250,500, 60);
-	drawMouth(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)], faces[i].eyeColour,faces[i].mouth,faces[i].centerSize);
+	drawPettal(startx, starty, faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour); //remove the y
+	drawCenter(startx,starty,faces[i].centerSize,faces[i].centerColour);
+	drawEyes(startx, starty,faces[i].eyeWidth,faces[i].eyeSize,faces[i].eyeColour);
+	drawStem(startx,starty,250,500, 60);
+	drawMouth(startx,starty, faces[i].eyeColour,faces[i].mouth,faces[i].centerSize);
 	drawKawaii();
 }
 

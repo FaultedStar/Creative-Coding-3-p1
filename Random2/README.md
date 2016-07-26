@@ -1,2 +1,4 @@
-First random test. I just subsituted what people could have added on the sliders with a random value. The value is only between the values that where presant on the slider.
-This is not true random, but it is very very caotic. I may work on a grid verson next where you can also change more values such as colour and "head size".
+Second Random test. 
+Finially got the grid working, I desided to go for the grid format because then it would be able to show the most amount of flowers. And more flowers is better, more colourfull ect. This was done by storing things in an array insead of gobal variables. 
+I think the flowers look cute while being drawn smaller, but this means that I am still having the overlapping pettal problem which I hope to fix with my next itteration. If I can't I dont mind too much because its adds to the "natural" style of flowers growing. 
+I have also added some code from stackoverflow (source in comments of code) which randomises the colour of the flowers pettals. I think this is a very needed addition "

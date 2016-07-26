@@ -48,7 +48,7 @@ var faces = [];
 var totalRows = 3;
 var totalCols = 5;
 
-//sway code
+//sway code THIS IS FROM THE PROCESSING SIGN WAVE REFFERENCE
 var xspacing = 960/totalCols;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
