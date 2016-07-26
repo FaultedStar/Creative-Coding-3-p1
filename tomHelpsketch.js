@@ -146,7 +146,7 @@ function calcSway(){
 
 function drawFace(x,y,i){
 	//uses i to find the correct index of the faces array, which holds a set amount of faces that are initialised in the setup method
-	drawPettal(startx+ yvalues[Math.floor(i/5)], starty + yvalues[Math.floor(i/5)], faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour); //remove the y
+	drawPettal(startx+ yvalues[Math.floor(i/5)], starty + yvalues[Math.floor(i/5)], faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour);
 	drawCenter(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],faces[i].centerSize,faces[i].centerColour);
 	drawEyes(startx+ yvalues[Math.floor(i/5)], starty+ yvalues[Math.floor(i/5)],faces[i].eyeWidth,faces[i].eyeSize,faces[i].eyeColour);
 	drawStem(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],250,500, 60);
