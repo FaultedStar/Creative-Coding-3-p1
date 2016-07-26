@@ -1,0 +1,4 @@
+Second Random test. 
+Finially got the grid working, I desided to go for the grid format because then it would be able to show the most amount of flowers. And more flowers is better, more colourfull ect. This was done by storing things in an array insead of gobal variables. 
+I think the flowers look cute while being drawn smaller, but this means that I am still having the overlapping pettal problem which I hope to fix with my next itteration. If I can't I dont mind too much because its adds to the "natural" style of flowers growing. 
+I have also added some code from stackoverflow (source in comments of code) which randomises the colour of the flowers pettals. I think this is a very needed addition "
