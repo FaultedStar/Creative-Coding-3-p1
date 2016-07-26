@@ -130,9 +130,9 @@ function randomThings(){
 	for(i = 0; i < faces.length; i++){
 		randomMouth = focusedRandom(0,2,1,1);
 		faces[i].mouth = randomMouth >1 ;
-		faces[i].eyeSize = focusedRandom(15,70);
-		faces[i].eyeWidth = focusedRandom(30,45,1,25);
-		faces[i].pettalLength = focusedRandom(70,170, 1,80);
+		faces[i].eyeSize = focusedRandom(20,70, 1, 50);
+		faces[i].eyeWidth = focusedRandom(25,45,1,25);
+		faces[i].pettalLength = focusedRandom(87,170, 1,100);
 		faces[i].pettalWidth = focusedRandom(30,100);
 		faces[i].pettalColour = getRandomColor();
 
