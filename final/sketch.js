@@ -32,9 +32,10 @@ var eyeSize = 45;
 var eyeWidth = 30;
 var eyeColour = '#bf8040';
 
+//smiley mouth or no smiley mouth
 var fillMouth = false;
 
-
+//number of faces in array
 var faces = [];
 var totalRows = 3;
 var totalCols = 5;
@@ -49,14 +50,15 @@ var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 
 
+
 function setup () {
 
 
-
  main_canvas = createCanvas(960, 500); 
-  w = width+16;
-  dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
+
+	  w = width+16; 
+	  dx = (TWO_PI / period) * xspacing;
+	  yvalues = new Array(floor(w/xspacing));
   angleMode(DEGREES); // for the sliders, they like degrees (me too, id like mine now)
 
 
@@ -84,10 +86,10 @@ function setup () {
 
 
 
-  button = createButton('random');
-  button.mousePressed(randomThings);
+  //button = createButton('random');
+ // button.mousePressed(randomThings);
   randomThings(); // initialise them all Random
-  button.position(10, 10);
+ // button.position(10, 10);
 
   
   // position each element on the page
@@ -103,6 +105,7 @@ function draw () {
 
 	clear();
 	background('#b3ffb3');
+	//background('#80e5ff');
   	starty = 0 - width/12;
 	//randomThings(); // this is just a setter
 	
@@ -118,6 +121,8 @@ function draw () {
 	}
 	calcSway();
 }
+
+
 
 function calcSway(){
 
@@ -135,26 +140,29 @@ function calcSway(){
   angleMode(DEGREES);
 }
 
+
 function drawFace(x,y,i){
 	//uses i to find the correct index of the faces array, which holds a set amount of faces that are initialised in the setup method
-	drawPettal(startx+ yvalues[Math.floor(i/5)], starty + yvalues[Math.floor(i/5)], faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour);
-	drawCenter(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],faces[i].centerSize,faces[i].centerColour);
-	drawEyes(startx+ yvalues[Math.floor(i/5)], starty+ yvalues[Math.floor(i/5)],faces[i].eyeWidth,faces[i].eyeSize,faces[i].eyeColour);
-	drawStem(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)],250,500, 60);
-	drawMouth(startx+ yvalues[Math.floor(i/5)],starty+ yvalues[Math.floor(i/5)], faces[i].eyeColour,faces[i].mouth,faces[i].centerSize);
-	drawKawaii();
+	
+		drawPettal(startx + yvalues[Math.floor(i/5)], starty, faces[i].pettalSpacing, faces[i].pettalWidth, faces[i].pettalLength, faces[i].pettalColour); //remove the y
+		drawCenter(startx + yvalues[Math.floor(i/5)],starty,faces[i].centerSize,faces[i].centerColour);
+		drawEyes(startx + yvalues[Math.floor(i/5)], starty,faces[i].eyeWidth,faces[i].eyeSize,faces[i].eyeColour);
+		drawStem(startx + yvalues[Math.floor(i/5)],starty,250,500, 60);
+		drawMouth(startx + yvalues[Math.floor(i/5)],starty, faces[i].pettalColour,faces[i].mouth,faces[i].centerSize);
+		drawKawaii();	
+	
 }
 
 function randomThings(){
 
 	// for each faces, randomize it's features
 	for(i = 0; i < faces.length; i++){
-		randomMouth = random(2);
+		randomMouth = focusedRandom(0,2,1,1);
 		faces[i].mouth = randomMouth >1 ;
-		faces[i].eyeSize = random(15,80);
-		faces[i].eyeWidth = random(20,45);
-		faces[i].pettalLength = random(70,200);
-		faces[i].pettalWidth = random(30,100);
+		faces[i].eyeSize = focusedRandom(20,70, 1, 50);
+		faces[i].eyeWidth = focusedRandom(25,45,1,25);
+		faces[i].pettalLength = focusedRandom(87,170, 1,100);
+		faces[i].pettalWidth = focusedRandom(30,100);
 		faces[i].pettalColour = getRandomColor();
 
 	}
@@ -183,7 +191,7 @@ push();
 	translate(X,Y);
 	noStroke();
 	fill(colour);
-	if (width<20 && size>60){
+	if (width<30 && size>30){
 		size = size -35;
 	}
 	ellipse(width,0,size,size);
@@ -237,6 +245,11 @@ function drawPettal(X, Y, spacing, width, length,colour){
 	pop();
 }
 
+function mouseClicked() {
+
+  randomThings(); 
+}
+
 function keyTyped() {
   if (key == '!') {
     saveBlocksImages();
@@ -244,7 +257,7 @@ function keyTyped() {
 }
 
 
-//STOLEN FROM http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
+//taken FROM http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
