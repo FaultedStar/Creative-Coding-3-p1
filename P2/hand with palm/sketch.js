@@ -12,7 +12,7 @@ var tilt5_slider;
 
 var canvasWidth = 960;
 var canvasHeight = 500;
-
+                      // add palm values
 var savedValues = {
   "A":
 {
@@ -39,13 +39,16 @@ var savedValues = {
   "box5": {
     "x": 5,
     "y": 66,
-    "tilt": 90
+    "tilt": 90  
+  },
+  "palm": {
+     "x": 0,
+      "y": 0,
+    "width": 200
   }
-}
-
-    ,
+},
   "B":
-    {
+   {
   "box1": {
     "x": -11,
     "y": 8,
@@ -70,13 +73,19 @@ var savedValues = {
     "x": -100,
     "y": 66,
     "tilt": 82
+  },
+  "palm": {
+    "x": -26,
+    "y": 19,
+    "width": 207
   }
-},
+}
+,
   "C":
     {
   "box1": {
-    "x": 11,
-    "y": 61,
+    "x": 4,
+    "y": 59,
     "tilt": -13
   },
   "box2": {
@@ -98,6 +107,11 @@ var savedValues = {
     "x": -11,
     "y": -59,
     "tilt": 0
+  },
+  "palm": {
+    "x": -94,
+    "y": -4,
+    "width": 71
   }
 }
 }
@@ -109,7 +123,7 @@ function setup () {
   // rotation in degrees (more slider friendly)
   angleMode(DEGREES);
 
-  // create two sliders
+  // create sliders                               add palm sliders
   pos1x_slider = createSlider(-200, 200, 0);
   pos1y_slider = createSlider(-200, 200, 0);
   tilt1_slider = createSlider(-180, 180, 0);
@@ -125,6 +139,9 @@ function setup () {
   pos5x_slider = createSlider(-200, 200, 0);
   pos5y_slider = createSlider(-200, 200, 0);
   tilt5_slider = createSlider(-180, 180, 0);
+  palmX_slider = createSlider(-180, 180, 0);
+  palmY_slider = createSlider(-180, 180, 0);
+  palmWidth_slider = createSlider(10, 250, 100);
   sel = createSelect();
   sel.option('A');
   sel.option('B');
@@ -135,7 +152,7 @@ function setup () {
   button.mousePressed(buttonPressedEvent);
 
   // x each element on the page
-  main_canvas.parent('canvasContainer');
+  main_canvas.parent('canvasContainer');        //palm sliders
   pos1x_slider.parent('slider1xContainer');
   pos1y_slider.parent('slider1yContainer');
   tilt1_slider.parent('slider1tContainer');
@@ -151,13 +168,15 @@ function setup () {
 	pos5x_slider.parent('slider5xContainer');
   pos5y_slider.parent('slider5yContainer');
   tilt5_slider.parent('slider5tContainer');
-
+  palmX_slider.parent('palmXContainer');
+  palmY_slider.parent('palmYContainer');
+   palmWidth_slider.parent('palmWidthContainer'); 
 
   sel.parent(selectorContainer);
   button.parent(buttonContainer);
 }
 
-function sliderToDataObject() {
+function sliderToDataObject() {         // add palm
   var obj = {};
   obj["box1"] = {};
   obj["box1"]["x"] = pos1x_slider.value();
@@ -179,10 +198,14 @@ function sliderToDataObject() {
   obj["box5"]["x"] = pos5x_slider.value();
   obj["box5"]["y"] = pos5y_slider.value();
   obj["box5"]["tilt"] = tilt5_slider.value();
+   obj["palm"] = {};
+   obj["palm"]["x"] = palmX_slider.value();
+   obj["palm"]["y"] = palmY_slider.value();
+  obj["palm"]["width"] = palmWidth_slider.value();
   return obj;
 }
 
-function dataObjectToSliders(obj) {
+function dataObjectToSliders(obj) {     //palm things
   pos1x_slider.value(obj["box1"]["x"]);
   pos1y_slider.value(obj["box1"]["y"]);
   tilt1_slider.value(obj["box1"]["tilt"]);
@@ -198,6 +221,9 @@ function dataObjectToSliders(obj) {
   pos5x_slider.value(obj["box5"]["x"]);
   pos5y_slider.value(obj["box5"]["y"]);
   tilt5_slider.value(obj["box5"]["tilt"]);
+  palmX_slider.value(obj["palm"]["x"]);
+  palmY_slider.value(obj["palm"]["y"]);
+  palmWidth_slider.value(obj["palm"]["width"]);
 }
 
 function letterChangedEvent() {
@@ -231,10 +257,17 @@ function drawFinger(x, y, tilt, colour, scale) {
   pop();
   //ellipse(0,0,30,60)
 }
-	function drawPalm(){
-		push();
+	function drawPalm(Ox, Oy,Pwidth){
+	 var middle_x = canvasWidth / 3*2;
+  var middle_y = canvasHeight / 2;
+  resetMatrix();
+  push();
+  translate(middle_x, middle_y);
 		fill(0);
-		ellipse(canvasWidth/3*2,canvasHeight/3*2, 200,200);
+    width = Pwidth.value();
+    var x = Ox.value();
+    var y = Oy.value();
+		ellipse(x,y,width,200);
 		pop();
 }
 
@@ -250,13 +283,13 @@ function draw () {
   background(colorBack);
   fill(colorFront);
   stroke(95, 52, 8);
-
+  drawPalm(palmX_slider, palmY_slider, palmWidth_slider);
   drawFromSliders(pos1x_slider, pos1y_slider, tilt1_slider,'#666699', 12);
   drawFromSliders(pos2x_slider, pos2y_slider, tilt2_slider, '#4ce600',10);
   drawFromSliders(pos3x_slider, pos3y_slider, tilt3_slider, '#ffff33',10);
   drawFromSliders(pos4x_slider, pos4y_slider, tilt4_slider,'#ffa31a',10);
   drawFromSliders(pos5x_slider, pos5y_slider, tilt5_slider, '#ff3300',8);
-  drawPalm();
+  
 
 }
 
