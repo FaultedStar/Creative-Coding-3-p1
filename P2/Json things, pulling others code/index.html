@@ -1,0 +1,257 @@
+<head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.js"></script>
+    <script language="javascript" type="text/javascript" src=".purview_helper.js"></script>
+    <script language="javascript" type="text/javascript" src="sketch.js"></script>
+    <style>
+        body   { padding: 0; margin: 0; }
+        .inner { position: absolute; }
+        #controls {
+            font: 300 12px "Helvetica Neue";
+            padding: 5;
+            margin: 5;
+            background: #f0f0f0;
+            opacity: 0.7;
+            -webkit-transition: opacity 0.2s ease;
+            -moz-transition: opacity 0.2s ease;
+            -o-transition: opacity 0.2s ease;
+            -ms-transition: opacity 0.2s ease;
+        }
+        #controls:hover { opacity: 0.9; }
+    </style>
+</head>
+<body style="background-color:white">
+    <div class="outer">
+        <div class="inner">
+            <div id="canvasContainer"></div>
+        </div>
+        <div class="inner" id="controls" height="500px">
+            <table>
+
+                <tr>
+                    <td>Pos1x1</td>
+                    <td id="slider1x1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos1y</td>
+                    <td id="slider1y1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos1Tilt</td>
+                    <td id="slider1t1Container"></td>
+                </tr>
+
+                    <td>Pos1x2</td>
+                    <td id="slider1x2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos1y2</td>
+                    <td id="slider1y2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos12Tilt</td>
+                    <td id="slider1t2Container"></td>
+                </tr>
+                    <td>Pos1x3</td>
+                    <td id="slider1x3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos1y3</td>
+                    <td id="slider1y3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos13Tilt</td>
+                    <td id="slider1t3Container"></td>
+                </tr>
+
+
+                <tr>
+                    <td>pos2x1</td>
+                    <td id="slider2x1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2y1</td>
+                    <td id="slider2y1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos21tilt</td>
+                    <td id="slider2t1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2x2</td>
+                    <td id="slider2x2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2y2</td>
+                    <td id="slider2y2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2tilt2</td>
+                    <td id="slider2t2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2x3</td>
+                    <td id="slider2x3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2y3</td>
+                    <td id="slider2y3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos2tilt3</td>
+                    <td id="slider2t3Container"></td>
+                </tr>
+
+
+
+                 <tr>
+                    <td>Pos3x1</td>
+                    <td id="slider3x1Container"></td>
+                </tr>
+                 <tr>
+                    <td>post3y1</td>
+                    <td id="slider3y1Container"></td>
+                </tr>
+                 <tr>
+                    <td>pos3Tilt1</td>
+                    <td id="slider3t1Container"></td>
+                </tr>
+
+                 <tr>
+                    <td>Pos3x2</td>
+                    <td id="slider3x2Container"></td>
+                </tr>
+                 <tr>
+                    <td>post3y2</td>
+                    <td id="slider3y2Container"></td>
+                </tr>
+                 <tr>
+                    <td>pos3Tilt2</td>
+                    <td id="slider3t2Container"></td>
+                </tr>
+
+                 <tr>
+                    <td>Pos3x3</td>
+                    <td id="slider3x3Container"></td>
+                </tr>
+                 <tr>
+                    <td>post3y3</td>
+                    <td id="slider3y3Container"></td>
+                </tr>
+                 <tr>
+                    <td>pos3Tilt3</td>
+                    <td id="slider3t3Container"></td>
+                </tr>
+
+
+                    <tr>
+                    <td>Pos4x1</td>
+                    <td id="slider4x1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4y1</td>
+                    <td id="slider4y1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4tilt1</td>
+                    <td id="slider4t1Container"></td>
+                </tr>
+
+                    <tr>
+                    <td>Pos4x2</td>
+                    <td id="slider4x2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4y2</td>
+                    <td id="slider4y2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4tilt2</td>
+                    <td id="slider4t2Container"></td>
+                </tr>
+
+                    <tr>
+                    <td>Pos4x3</td>
+                    <td id="slider4x3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4y3</td>
+                    <td id="slider4y3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos4tilt3</td>
+                    <td id="slider4t3Container"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td>pos5x1</td>
+                    <td id="slider5x1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5y1</td>
+                    <td id="slider5y1Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5Tilt1</td>
+                    <td id="slider5t1Container"></td>
+                </tr>  
+
+                <tr>
+                    <td>pos5x2</td>
+                    <td id="slider5x2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5y2</td>
+                    <td id="slider5y2Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5Tilt2</td>
+                    <td id="slider5t2Container"></td>
+                </tr> 
+
+                <tr>
+                    <td>pos5x3</td>
+                    <td id="slider5x3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5y3</td>
+                    <td id="slider5y3Container"></td>
+                </tr>
+                <tr>
+                    <td>pos5Tilt3</td>
+                    <td id="slider5t3Container"></td>
+                </tr> 
+
+
+
+                <tr>
+                    <td>Palm X</td>
+                    <td id="palmXContainer"></td>
+                </tr>
+                 <tr>
+                    <td>Palm Y</td>
+                    <td id="palmYContainer"></td>
+                </tr>
+                 <tr>
+                    <td>PalmWidth</td>
+                    <td id="palmWidthContainer"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Letter</td>
+                    <td id="selectorContainer"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="buttonContainer"></td>
+                </tr>
+        </div>
+    </div>
+</table>
+</body>

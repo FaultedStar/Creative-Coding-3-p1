@@ -2,7 +2,25 @@
 var canvasWidth = 960;
 var canvasHeight = 500;
 
-var currentLetter;
+
+
+// this is the variable that holds all character objects
+var letterParams = null;
+// the sliders will write to this location
+var debugLetter = "9";
+
+
+var initialDrawMode = "solo";
+var curDrawMode;
+
+// these variables are used for animation
+var soloCurLetter = "A";
+var soloPrevObj = null;
+var soloIsAnimating = false;
+var soloNumAnimationFrames = 60;
+var soloCurAnimationFrame = 0;
+
+
 var lettersJson; 
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 var savedValues = {
@@ -2306,13 +2324,17 @@ var savedValues = {
     "width": 81
   }
 }
-
-
 }
-
 function preload() {
- lettersJson = loadJSON('letters.JSON');
+  // sometimes when debugging, letterParams is initialized locally
+  if(letterParams == null) {
+    letterParams = loadJSON('letters.json');
+  }
 }
+
+
+
+
 
 function setup () {
   // create the drawing canvas, save the canvas element
@@ -2320,6 +2342,20 @@ function setup () {
 
   // rotation in degrees (more slider friendly)
   angleMode(DEGREES);
+
+  sel_char = createSelect();
+  for (var i = 0, len = letters.length; i < len; i++) {
+    sel_char.option(letters[i]);
+  }
+  sel_char.changed(letterChangedEvent);
+
+  sel_mode = createSelect();
+  sel_mode.option("alphabet");  
+  sel_mode.option("solo");  
+  sel_mode.changed(modeChangedEvent);
+  sel_mode.value(initialDrawMode);
+  curDrawMode = initialDrawMode;
+
 
   // create sliders                   
   // finger 1 AKA Thumb           
@@ -2520,6 +2556,17 @@ function setup () {
   button.parent(buttonContainer);
 }
 
+function modeChangedEvent() {
+  curDrawMode = sel_mode.value();
+}
+
+// Funcation called when DOM letter selector is changed
+function letterChangedEvent() {
+  var item = sel_char.value();
+  dataObjectToSliders(letterParams[item]);
+}
+
+
 function sliderToDataObject() {       
   var obj = {};
   obj["box1"] = {};
@@ -2696,13 +2743,15 @@ function letterChangedEvent() {
   var item = sel.value();
   currentLetter = sel.value;
   
-  dataObjectToSliders(savedValues[item]);
+ // dataObjectToSliders(savedValues[item]);
 
 }
 
 function changeToLetter(letter){
-  currentLetter = letter;
-dataObjectToSliders(savedValues[letter]);
+soloCurLetter = letter;
+
+//dataObjectToSliders(savedValues[letter]);
+
 
 }
 function buttonPressedEvent() {
@@ -2714,6 +2763,93 @@ function buttonPressedEvent() {
 var colorFront = [207, 222, 227];
 var colorBack = '#ffffcc';
 
+function computeCurrentSoloChar() {
+  // now figure out what object to draw
+  var obj;
+  if (soloIsAnimating) {
+    nextObj = letterParams[soloCurLetter];
+    // interpolation logic here
+    obj = {};
+    obj["box1"] = {};
+    obj["box1"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["x1"], nextObj["box1"]["x1"])
+    obj["box1"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["y1"], nextObj["box1"]["y1"])
+    obj["box1"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["tilt1"], nextObj["box1"]["tilt1"])
+
+    obj["box1"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["x2"], nextObj["box1"]["x2"])
+    obj["box1"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["y2"], nextObj["box1"]["y2"])
+    obj["box1"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["tilt2"], nextObj["box1"]["tilt2"])
+
+    obj["box1"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["x3"], nextObj["box1"]["x3"])
+    obj["box1"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["y3"], nextObj["box1"]["y3"])
+    obj["box1"]["tilt3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box1"]["tilt3"], nextObj["box1"]["tilt3"])
+
+
+    obj["box2"] = {};
+    obj["box2"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["x1"], nextObj["box2"]["x1"])
+    obj["box2"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["y1"], nextObj["box2"]["y1"])
+    obj["box2"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["tilt1"], nextObj["box2"]["tilt1"])
+
+    obj["box2"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["x2"], nextObj["box2"]["x2"])
+    obj["box2"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["y2"], nextObj["box2"]["y2"])
+    obj["box2"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["tilt2"], nextObj["box2"]["tilt2"])
+
+    obj["box2"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["x3"], nextObj["box2"]["x3"])
+    obj["box2"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["y3"], nextObj["box2"]["y3"])
+    obj["box2"]["tilt3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box2"]["tilt3"], nextObj["box2"]["tilt3"])
+
+
+    obj["box3"] = {};
+    obj["box3"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x1"], nextObj["box3"]["x1"])
+    obj["box3"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y1"], nextObj["box3"]["y1"])
+    obj["box3"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt1"], nextObj["box1"]["tilt1"])
+
+    obj["box3"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x2"], nextObj["box3"]["x2"])
+    obj["box3"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y2"], nextObj["box3"]["y2"])
+    obj["box3"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt2"], nextObj["box1"]["tilt2"])
+
+    obj["box3"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x3"], nextObj["box3"]["x3"])
+    obj["box3"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y3"], nextObj["box3"]["y3"])
+    obj["box3"]["tilt3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt3"], nextObj["box3"]["tilt3"])
+
+
+       obj["box4"] = {};
+    obj["box4"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["x1"], nextObj["box4"]["x1"])
+    obj["box4"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["y1"], nextObj["box4"]["y1"])
+    obj["box4"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["tilt1"], nextObj["box4"]["tilt1"])
+
+    obj["box4"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["x2"], nextObj["box4"]["x2"])
+    obj["box4"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["y2"], nextObj["box4"]["y2"])
+    obj["box4"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["tilt2"], nextObj["box4"]["tilt2"])
+
+    obj["box4"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["x3"], nextObj["box4"]["x3"])
+    obj["box4"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["y3"], nextObj["box4"]["y3"])
+    obj["box4"]["tilt3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box4"]["tilt3"], nextObj["box4"]["tilt3"])
+
+
+       obj["box5"] = {};
+    obj["box5"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["x1"], nextObj["box5"]["x1"])
+    obj["box5"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["y1"], nextObj["box5"]["y1"])
+    obj["box5"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["tilt1"], nextObj["box5"]["tilt1"])
+
+    obj["box5"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["x2"], nextObj["box5"]["x2"])
+    obj["box5"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["y2"], nextObj["box5"]["y2"])
+    obj["box5"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["tilt2"], nextObj["box5"]["tilt2"])
+
+    obj["box5"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["x3"], nextObj["box5"]["x3"])
+    obj["box5"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["y3"], nextObj["box5"]["y3"])
+    obj["box5"]["tilt3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box5"]["tilt3"], nextObj["box5"]["tilt3"])
+
+      obj["palm"] = {};
+      obj["palm"]["x"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["palm"]["x"], nextObj["palm"]["x"])
+    obj["palm"]["y"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["palm"]["y"], nextObj["palm"]["y"])
+    obj["palm"]["width"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["palm"]["width"], nextObj["palm"]["width"])
+
+  }
+  else {
+    obj = letterParams[soloCurLetter];
+  }
+  return obj;
+}
 ////////////////////////////////////////////////////DRAWING BIT LOOK
 function drawFinger(x, y, tilt, colour, scale) {
   var middle_x = canvasWidth / 3*2;
@@ -2738,9 +2874,9 @@ function drawFinger(x, y, tilt, colour, scale) {
   push();
   translate(middle_x, middle_y);
 		fill(0);
-    width = Pwidth.value();
-    var x = Ox.value();
-    var y = Oy.value();
+    width = Pwidth;
+    var x = Ox;
+    var y = Oy;
 		ellipse(x,y,width,200);
 		pop();
 }
@@ -2753,10 +2889,63 @@ function drawFromSliders(x_offset, y_offset, tilt_slider,colour, scale) {
   drawFinger(x,y, tilt, colour, scale);
 }
 
+// NEVER TOUCHES SLIDERS
+function drawFromDataObject(x, y, s, obj) {
+  push();
+  translate(x, y);
+  scale(s, s);
+    drawPalm(obj['palm']['x'], obj['palm']['y'], obj['palm']['width']);
+  drawFinger(obj["box1"]["x1"], obj["box1"]["y1"], obj["box1"]["tilt1"],'#666699',s+1);
+  drawFinger(obj["box1"]["x2"], obj["box1"]["y2"], obj["box1"]["tilt2"],'#666699',s+1);
+  drawFinger(obj["box1"]["x3"], obj["box1"]["y3"], obj["box1"]["tilt3"],'#666699',s+1)
+
+  drawFinger(obj["box2"]["x1"], obj["box2"]["y1"], obj["box2"]["tilt1"],'#4ce600',s);
+  drawFinger(obj["box2"]["x2"], obj["box2"]["y2"], obj["box2"]["tilt2"],'#4ce600',s);
+  drawFinger(obj["box2"]["x3"], obj["box2"]["y3"], obj["box2"]["tilt3"],'#4ce600',s);
+
+  drawFinger(obj["box3"]["x1"], obj["box3"]["y1"], obj["box3"]["tilt1"],'#ffff33',s);
+  drawFinger(obj["box3"]["x2"], obj["box3"]["y2"], obj["box3"]["tilt2"],'#ffff33',s);
+  drawFinger(obj["box3"]["x3"], obj["box3"]["y3"], obj["box3"]["tilt3"],'#ffff33',s);
+
+  drawFinger(obj["box4"]["x1"], obj["box4"]["y1"], obj["box4"]["tilt1"],'#ffa31a',s);
+  drawFinger(obj["box4"]["x2"], obj["box4"]["y2"], obj["box4"]["tilt2"],'#ffa31a',s);
+  drawFinger(obj["box4"]["x3"], obj["box4"]["y3"], obj["box4"]["tilt3"],'#ffa31a',s);
+
+  drawFinger(obj["box5"]["x1"], obj["box5"]["y1"], obj["box5"]["tilt1"],'#ff3300',s-1);
+  drawFinger(obj["box5"]["x2"], obj["box5"]["y2"], obj["box5"]["tilt2"],'#ff3300',s-1);
+  drawFinger(obj["box5"]["x3"], obj["box5"]["y3"], obj["box5"]["tilt3"],'#ff3300',s-1);
+
+
+
+  pop();
+}
+
 function draw () {
   background(colorBack);
   fill(colorFront);
   stroke(95, 52, 8);
+  var o = 40
+  var w2 = width - 2 * o
+  var h2 = height - 2 * o
+
+  if (curDrawMode == "solo") {
+    // see if animation should be turned off
+    if(soloIsAnimating && soloCurAnimationFrame >= soloNumAnimationFrames) {
+      soloIsAnimating = false;
+    }
+    // if we are animating, increment the number of animation frames
+    if(soloIsAnimating) {
+      soloCurAnimationFrame = soloCurAnimationFrame + 1;
+    }
+    var obj = computeCurrentSoloChar();
+    drawFromDataObject(o + w2/2.0, o + h2/2.0, 3, obj)
+  }
+//drawSliderMethod();
+}
+
+function drawSliderMethod(){
+
+
   drawPalm(palmX_slider, palmY_slider, palmWidth_slider);
 
    //one
@@ -2785,7 +2974,6 @@ function draw () {
   drawFromSliders(pos5x2_slider, pos5y2_slider, tilt52_slider, '#ff3300',2);
   drawFromSliders(pos5x3_slider, pos5y3_slider, tilt53_slider, '#ff3300',2);
   
-
 }
 
 function keyTyped() {
