@@ -56,119 +56,7 @@ function setup () {
   curDrawMode = initialDrawMode;
 
 
-  // create sliders                   
-  // finger 1 AKA Thumb           
-  pos1x1_slider = createSlider(-200, 200, 0); // closest
-  pos1y1_slider = createSlider(-200, 200, 0);
-  tilt11_slider = createSlider(-180, 180, 0);
 
-
-  pos1x2_slider = createSlider(-200, 200, 0); //Middle
-  pos1y2_slider = createSlider(-200, 200, 0);
-  tilt12_slider = createSlider(-180, 180, 0);
-
-
-  pos1x3_slider = createSlider(-200, 200, 0);//tip
-  pos1y3_slider = createSlider(-200, 200, 0);
-  tilt13_slider = createSlider(-180, 180, 0);
-
-
-
-// Finger 2 AKA Pointer
-  pos2x1_slider = createSlider(-200, 200, 0); // closest
-  pos2y1_slider = createSlider(-200, 200, 0);
-  tilt21_slider = createSlider(-180, 180, 0);
-
-  pos2x2_slider = createSlider(-200, 200, 0);//Middle
-  pos2y2_slider = createSlider(-200, 200, 0);
-  tilt22_slider = createSlider(-180, 180, 0);
-
-  pos2x3_slider = createSlider(-200, 200, 0);//tip
-  pos2y3_slider = createSlider(-200, 200, 0);
-  tilt23_slider = createSlider(-180, 180, 0);
-
-  // Finger 3 AKA Middle Finger
-  pos3x1_slider = createSlider(-200, 200, 0);  // closest
-  pos3y1_slider = createSlider(-200, 200, 0);
-  tilt31_slider = createSlider(-180, 180, 0);
-
-  pos3x2_slider = createSlider(-200, 200, 0);//Middle
-  pos3y2_slider = createSlider(-200, 200, 0);
-  tilt32_slider = createSlider(-180, 180, 0);
-  
-  pos3x3_slider = createSlider(-200, 200, 0);//tip
-  pos3y3_slider = createSlider(-200, 200, 0);
-  tilt33_slider = createSlider(-180, 180, 0);
-
-  // finger 4 AKA Ring finger
-  pos4x1_slider = createSlider(-200, 200, 0);  // closest
-  pos4y1_slider = createSlider(-200, 200, 0);
-  tilt41_slider = createSlider(-180, 180, 0);
-
-  pos4x2_slider = createSlider(-200, 200, 0);//Middle
-  pos4y2_slider = createSlider(-200, 200, 0);
-  tilt42_slider = createSlider(-180, 180, 0);
-
-  pos4x3_slider = createSlider(-200, 200, 0);//tip
-  pos4y3_slider = createSlider(-200, 200, 0);
-  tilt43_slider = createSlider(-180, 180, 0);
-
-  // finger 5 AKA Pinky
-  pos5x1_slider = createSlider(-200, 200, 0); // closest
-  pos5y1_slider = createSlider(-200, 200, 0);
-  tilt51_slider = createSlider(-180, 180, 0);
-
-  pos5x2_slider = createSlider(-200, 200, 0);//Middle
-  pos5y2_slider = createSlider(-200, 200, 0);
-  tilt52_slider = createSlider(-180, 180, 0);
-
-
-  pos5x3_slider = createSlider(-200, 200, 0);//tip
-  pos5y3_slider = createSlider(-200, 200, 0);
-  tilt53_slider = createSlider(-180, 180, 0);
-
-
-  palmX_slider = createSlider(-180, 180, 0);
-  palmY_slider = createSlider(-180, 180, 0);
-  palmWidth_slider = createSlider(10, 250, 100);
-
-  sel = createSelect();
-  sel.option('A');
-  sel.option('B');
-  sel.option('C');
-  sel.option('D');
-  sel.option('E');
-  sel.option('F');
-  sel.option('G');
-  sel.option('H');
-  sel.option('I');
-  sel.option('J');
-  sel.option('K');
-  sel.option('L');
-  sel.option('M');
-  sel.option('N');
-  sel.option('O');
-  sel.option('P');
-  sel.option('Q');
-  sel.option('R');
-  sel.option('S');
-  sel.option('T');
-  sel.option('U');
-  sel.option('V');
-  sel.option('W');
-  sel.option('X');
-  sel.option('Y');
-  sel.option('Z');
-  sel.option('1');
-  sel.option('2');
-  sel.option('3');
-  sel.option('4');
-  sel.option('5');
-  sel.option('6');
-  sel.option('7');
-  sel.option('8');
-  sel.option('9');
-  sel.option('0');
   changeToLetter('D')
 //  sel.changed(letterChangedEvent);
 
@@ -178,80 +66,8 @@ function setup () {
   // x each element on the page
   main_canvas.parent('canvasContainer');      
 
-  //finger 1
-  pos1x1_slider.parent('slider1x1Container');
-  pos1y1_slider.parent('slider1y1Container');
-  tilt11_slider.parent('slider1t1Container');
 
 
-  pos1x2_slider.parent('slider1x2Container');
-  pos1y2_slider.parent('slider1y2Container');
-  tilt12_slider.parent('slider1t2Container');
-
-  pos1x3_slider.parent('slider1x3Container'); //point
-  pos1y3_slider.parent('slider1y3Container');
-  tilt13_slider.parent('slider1t3Container');
-
-  //finger 2
-  pos2x1_slider.parent('slider2x1Container');
-  pos2y1_slider.parent('slider2y1Container');
-  tilt21_slider.parent('slider2t1Container');
-
-  pos2x2_slider.parent('slider2x2Container');
-  pos2y2_slider.parent('slider2y2Container');
-  tilt22_slider.parent('slider2t2Container');
-
-  pos2x3_slider.parent('slider2x3Container'); //point
-  pos2y3_slider.parent('slider2y3Container');
-  tilt23_slider.parent('slider2t3Container');
-
-	//finger 3
-  pos3x1_slider.parent('slider3x1Container');
-  pos3y1_slider.parent('slider3y1Container');
-  tilt31_slider.parent('slider3t1Container');
-
-  pos3x2_slider.parent('slider3x2Container');
-  pos3y2_slider.parent('slider3y2Container');
-  tilt32_slider.parent('slider3t2Container');
-
-  pos3x3_slider.parent('slider3x3Container'); //point
-  pos3y3_slider.parent('slider3y3Container');
-  tilt33_slider.parent('slider3t3Container');
-
-  //finger 4
-  pos4x1_slider.parent('slider4x1Container');
-  pos4y1_slider.parent('slider4y1Container');
-  tilt41_slider.parent('slider4t1Container');
-
-  pos4x2_slider.parent('slider4x2Container');
-  pos4y2_slider.parent('slider4y2Container');
-  tilt42_slider.parent('slider4t2Container');
-
-  pos4x3_slider.parent('slider4x3Container'); //point
-  pos4y3_slider.parent('slider4y3Container');
-  tilt43_slider.parent('slider4t3Container');
-
-
-  //finger 5
-  pos5x1_slider.parent('slider5x1Container');
-  pos5y1_slider.parent('slider5y1Container');
-  tilt51_slider.parent('slider5t1Container');
-
-  pos5x2_slider.parent('slider5x2Container');
-  pos5y2_slider.parent('slider5y2Container');
-  tilt52_slider.parent('slider5t2Container');
-
-  pos5x3_slider.parent('slider5x3Container'); //point
-  pos5y3_slider.parent('slider5y3Container');
-  tilt53_slider.parent('slider5t3Container');
-
-
-
-  palmX_slider.parent('palmXContainer');
-  palmY_slider.parent('palmYContainer');
-   palmWidth_slider.parent('palmWidthContainer'); 
-
-  sel.parent(selectorContainer);
   button.parent(buttonContainer);
 }
 
@@ -266,95 +82,7 @@ function letterChangedEvent() {
 }
 
 
-function sliderToDataObject() {       
-  var obj = {};
-  obj["box1"] = {};
-  obj["box1"]["x1"] = pos1x1_slider.value();
-  obj["box1"]["y1"] = pos1y1_slider.value();
-  obj["box1"]["tilt1"] = tilt11_slider.value();
 
-
-  obj["box1"]["x2"] = pos1x2_slider.value();
-  obj["box1"]["y2"] = pos1y2_slider.value();
-  obj["box1"]["tilt2"] = tilt12_slider.value();
-
-  
-  obj["box1"]["x3"] = pos1x3_slider.value();
-  obj["box1"]["y3"] = pos1y3_slider.value();
-  obj["box1"]["tilt3"] = tilt13_slider.value();
-
-
-
-  obj["box2"] = {};
-  obj["box2"]["x1"] = pos2x1_slider.value();
-  obj["box2"]["y1"] = pos2y1_slider.value();
-  obj["box2"]["tilt1"] = tilt21_slider.value();
-
-
-
-  obj["box2"]["x2"] = pos2x2_slider.value();
-  obj["box2"]["y2"] = pos2y2_slider.value();
-  obj["box2"]["tilt2"] = tilt22_slider.value();
-
-
-  obj["box2"]["x3"] = pos2x3_slider.value();
-  obj["box2"]["y3"] = pos2y3_slider.value();
-  obj["box2"]["tilt3"] = tilt23_slider.value();
-
-
-  obj["box3"] = {};
-  obj["box3"]["x1"] = pos3x1_slider.value();
-  obj["box3"]["y1"] = pos3y1_slider.value();
-  obj["box3"]["tilt1"] = tilt31_slider.value();
-
-
-  obj["box3"]["x2"] = pos3x2_slider.value();
-  obj["box3"]["y2"] = pos3y2_slider.value();
-  obj["box3"]["tilt2"] = tilt32_slider.value();
-
-  obj["box3"]["x3"] = pos3x3_slider.value();
-  obj["box3"]["y3"] = pos3y3_slider.value();
-  obj["box3"]["tilt3"] = tilt33_slider.value();
-
-
-   obj["box4"] = {};
-  obj["box4"]["x1"] = pos4x1_slider.value();
-  obj["box4"]["y1"] = pos4y1_slider.value();
-  obj["box4"]["tilt1"] = tilt41_slider.value();
-
-
-  obj["box4"]["x2"] = pos4x2_slider.value();
-  obj["box4"]["y2"] = pos4y2_slider.value();
-  obj["box4"]["tilt2"] = tilt42_slider.value();
-
-
-  obj["box4"]["x3"] = pos4x3_slider.value();
-  obj["box4"]["y3"] = pos4y3_slider.value();
-  obj["box4"]["tilt3"] = tilt43_slider.value();
-
-
-  obj["box5"] = {};
-  obj["box5"]["x1"] = pos5x1_slider.value();
-  obj["box5"]["y1"] = pos5y1_slider.value();
-  obj["box5"]["tilt1"] = tilt51_slider.value();
-
-
-  obj["box5"]["x2"] = pos5x2_slider.value();
-  obj["box5"]["y2"] = pos5y2_slider.value();
-  obj["box5"]["tilt2"] = tilt52_slider.value();
-
-
-  obj["box5"]["x3"] = pos5x3_slider.value();
-  obj["box5"]["y3"] = pos5y3_slider.value();
-  obj["box5"]["tilt3"] = tilt53_slider.value();
-
-
-   obj["palm"] = {};
-   obj["palm"]["x"] = palmX_slider.value();
-   obj["palm"]["y"] = palmY_slider.value();
-  obj["palm"]["width"] = palmWidth_slider.value();
-  return obj;
-}
 
 function dataObjectToSliders(obj) {     
 	//ONE
@@ -500,11 +228,11 @@ function computeCurrentSoloChar() {
     obj["box3"] = {};
     obj["box3"]["x1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x1"], nextObj["box3"]["x1"])
     obj["box3"]["y1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y1"], nextObj["box3"]["y1"])
-    obj["box3"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt1"], nextObj["box1"]["tilt1"])
+    obj["box3"]["tilt1"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt1"], nextObj["box3"]["tilt1"])
 
     obj["box3"]["x2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x2"], nextObj["box3"]["x2"])
     obj["box3"]["y2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y2"], nextObj["box3"]["y2"])
-    obj["box3"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt2"], nextObj["box1"]["tilt2"])
+    obj["box3"]["tilt2"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["tilt2"], nextObj["box3"]["tilt2"])
 
     obj["box3"]["x3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["x3"], nextObj["box3"]["x3"])
     obj["box3"]["y3"] = map(soloCurAnimationFrame, 0, soloNumAnimationFrames, soloPrevObj["box3"]["y3"], nextObj["box3"]["y3"])
@@ -682,9 +410,19 @@ function keyTyped() {
     else if (key == '@') {
         saveBlocksImages(true);
     } else {
-        var letter = key.toUpperCase();
-       // if (lettersJson[letter] != null) {
-            changeToLetter(letter);
-       // }
+         upper_key = key.toUpperCase();
+    if (upper_key in letterParams) {
+      if(curDrawMode == "solo") {
+        soloPrevObj = computeCurrentSoloChar();
+        soloCurLetter = upper_key;
+        soloIsAnimating = true;
+        soloCurAnimationFrame = 0;        
+      }
+      else if(curDrawMode == "alphabet") {
+        sel_char.value(upper_key);
+        dataObjectToSliders(letterParams[upper_key]);
+      }
     }
+  }
+
 }
