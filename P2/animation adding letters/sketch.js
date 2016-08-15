@@ -350,7 +350,8 @@ function drawFromDataObject(x, y, s, obj) {
 function draw () {
   background(colorBack);
   fill(colorFront);
-  stroke(95, 52, 8);
+ stroke(95, 52, 8);
+ //noStroke();
   var o = 40
   var w2 = width - 2 * o
   var h2 = height - 2 * o
