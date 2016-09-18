@@ -86,16 +86,16 @@ var testColour = color(255,89,186);
     //image(this.img);
     Gradient(0,0,440,220,baseColour,this.colour);
     // chose how many owls to draw
-   // var num_owls = Math.floor(focusedRandom(5, 11, 3, 7));
+ //   var num_owls = Math.floor(focusedRandom(5, 11, 3, 7));
 
     // draw the owls based on the data in temperatures
-    //var spacing = 400 / num_owls;
+   // var spacing = 400 / num_owls;
     //for (i=0; i<num_owls; i++) {
-      //var xpos = 35 + spacing * i;
+     // var xpos = 35 + spacing * i;
       //var gray = randomColour();
       //var scalar = focusedRandom(0.15, 0.75, 2);
-     // this.bug(xpos, 220-2*this.temperatures[i], gray, scalar);
-   // }
+      //this.bug(xpos, 220-2*this.temperatures[i], gray, scalar);
+    }
 
     // set have_drawn to true since we have completed
     this.have_drawn = true;
