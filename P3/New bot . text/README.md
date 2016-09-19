@@ -1,7 +1,2 @@
-PS3 MDDN 342 2016
-
-An example of how to get started with the Online Chatbot.
-
-Do not modify the skech.js: all changes should be made to bot.js.
-made the background pretty and gradiented, still need to work on imput
-
+Ok! we are useing a super cool json file to make the bottom colour now! and it reads out at the bottom! its based on crayon colours which is neat!
+Im now gonna work on an image I can put on top of the gradent that will be pretty and then have the text KINDA discribe it! we will see how it goes.
