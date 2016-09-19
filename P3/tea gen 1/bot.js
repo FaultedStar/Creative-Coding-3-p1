@@ -114,7 +114,24 @@ function bot() {
 		console.log(tea);
 		return tea;
 	}
+	
 
+	this.drawCup = function(){
+			push();
+    translate(220, 110);
+   // scale(s);  // Set the createCanvas
+  //  stroke(g); // Set the gray value
+    strokeWeight(70);
+ 
+    noStroke();
+    fill(this.colour2);
+    ellipse(0, 0, 100, 100);  // Left eye
+   
+   // quad(0, -58, 4, -51, 0, -44, -4, -51); // Beak
+    pop();
+
+
+	}
  this.respond = function() {
  	this.setGradent();
 
@@ -123,7 +140,7 @@ function bot() {
 
     this.Gradient(0,0,440,220,this.colour1,this.colour2);
 
-    
+    this.drawCup();
 
     // set have_drawn to true since we have completed
     this.have_drawn = true;
