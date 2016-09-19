@@ -26,7 +26,7 @@ function bot() {
 
 var colRand;
 	var baseColour= randomColour();
-       this.colour = RandomCrayon();
+       this.colour = randomColour();
 var testColour = color(255,89,186);
   // make this true once image has been drawn
   this.have_drawn = false;
@@ -66,10 +66,11 @@ var testColour = color(255,89,186);
     var crayon = random(CrayonColours);
     crayonName = crayon.color;
     console.log(crayonName);
-     console.log(crayon["colour"]);
-    var  c = color(crayon.hex);
+    
+ //    console.log(crayon["colour"]);
+   // var  c = color(crayon.hex);
 
-    return c;
+   // return c;
   }
 
 //this is just closed data from the top
