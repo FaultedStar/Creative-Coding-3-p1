@@ -4,14 +4,12 @@ var TeaList;
      var crayonName;
 
       // setting up imdb
-     var closed_companies = {
-  "horror" : ["co0137447", //Twisted pictures
-              "co0098315",  //Blumhouse
-              "co0084207"], //Vertigo
-  "scifi" : ["co0009119", //Amblin entertainment
-              "co0159111"],
-  "romcom" : ["co0005073"] //Universal (Will produce inconsistent results)
-};
+     var closed_companies = 
+             ["co0215519", //indian painbrush
+              "co0048420", //Ghibli
+              "co0017902"  //pixar
+            ] 
+;
 
 
 
@@ -50,56 +48,28 @@ function bot() {
 
   // load all external images or data
   this.preload = function() {
+
      this.crayonColours = loadJSON('crayon.json');
      this.GemstoneList = loadJSON('gemstone.json');
      this.TeaList = loadJSON('tea.json');
+     this.getReview();
   
   }
+
    //Locates a random movie from a company that specialises in the appropriate genre. and pulls its review http://imdb.wemakesites.net/ using this api
    // this is coped code from tom lewis.
-  this.getReview = function( genre ) {
+  this.getReview = function(  ) {
     var bot = this;
     $.ajax({
-        url: "http://imdb.wemakesites.net/api/" + random( closed_companies[ genre ] ),
+        url: "http://imdb.wemakesites.net/api/" + random(closed_companies),
         crossDomain: true,
         dataType: "jsonp",
         success: function(data) {
-          $.ajax({
-              url: "http://imdb.wemakesites.net/api/" + random( data.data.filmography ).id,
-              crossDomain: true,
-              dataType: "jsonp",
-              success: function(data) {
-                bot.titleID = data.data.id;
-                bot.generatebitlyLink();
-                bot.review = data.data.review;
-              }
-          });
+          bot.movie = random(data.data.filmography).title;
         }
     });
   }
 
-// also stolen from Tom Lewis
-  this.generatebitlyLink = function(){
-    var imdbURL = "http://www.imdb.com/title/" + this.titleID + "/";
-    var bot = this;
-    var func = function(response){
-      bot.shortURL = response;
-      bot.shortURL = bot.shortURL.substring(7)
-    }
-    $.getJSON(
-        "http://api.bitly.com/v3/shorten?callback=?", 
-        { 
-            "format": "json",
-            "apiKey": "R_97be122193404c19a84555a90e98cc0d",
-            "login": "o_6v25k0dh8d",
-            "longUrl": imdbURL
-        },
-        function(response)
-        {
-            func(response.data.url);
-        }
-    );
-  }
 
   this.randomCrayon = function(){
     var c = this.crayonColours;
@@ -150,7 +120,6 @@ function bot() {
 
 		var tea = this.TeaList;
 		tea = random(tea.teas);
-		console.log(tea);
 		return tea;
 	}
 	
@@ -180,19 +149,18 @@ function bot() {
     this.Gradient(0,0,440,220,this.colour1,this.colour2);
 
     this.drawCup();
-    //this.getReview();
-    //console.log()
-    // set have_drawn to true since we have completed
-    this.have_drawn = true;
-
-    // return the message
-  //  var message = "Current " + num_owls.toString() + " day weather owl forecast";
 
 
-   var message = "#TeacupGeneration recommends: " + this.crayonName1 + " " + this.crayonName2 + " with " + this.getTea() +" tea in a " + this.getGem() + " cup!";
+    var message = "#TeacupGeneration recommends: " + this.crayonName1 + " " + this.crayonName2 + " with " + this.getTea() +" tea in a " + this.getGem() + " cup";
+   if( this.movie !== undefined ) {
+      message += " while watching : " + this.movie;
+      this.have_drawn = true;
+   }
+
+   message += "!"
    if (message.length > 140){
 
-
+      //getMessage function or something
    }
 
   return message;
