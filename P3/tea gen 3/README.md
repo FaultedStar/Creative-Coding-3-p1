@@ -11,3 +11,5 @@ I relised that this is a pun. Because tea cup generation is another name for gen
 So in a way this is reclaming the word/ hashtag by making very pintrist worthy cups of tea
 
 I have now added the ability to have a movie recomendation with your tea! if thats too long for twitter, no movie for you.
+
+NOW WITH TEA GRAPHIC!!! home streach now, next commit may be final

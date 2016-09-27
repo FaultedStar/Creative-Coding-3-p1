@@ -7,7 +7,10 @@ var TeaList;
      var closed_companies = 
              ["co0215519", //indian painbrush
               "co0048420", //Ghibli
-              "co0017902"  //pixar
+              "co0366724",  //realitism films
+              "co0142446",  // mandate pictures
+              "co0040322",  // mr. mudd
+              "co0378199"   // Diroriro (crystal fairy and the magical cactus)
             ] 
 ;
 
@@ -129,12 +132,19 @@ function bot() {
     translate(220, 110);
    // scale(s);  // Set the createCanvas
   //  stroke(g); // Set the gray value
-    strokeWeight(70);
+    strokeWeight(2);
  
     noStroke();
     fill(this.colour2);
-    ellipse(0, 0, 100, 100);  // Left eye
-   
+    stroke(this.colour1);
+    //ellipse(0, 0, 100, 100); 
+    arc(0, -50, 200, 250, 0, PI,CHORD);
+    rotate(-PI/2.75);
+     arc(30, 74, 90, 90, 0, PI);
+
+
+    //arc(290, 60, 80, 80, PI, TWO_PI+HALF_PI); 
+    //arc(320, 600, 160, 80, QUARTER_PI, PI+QUARTER_PI);
    // quad(0, -58, 4, -51, 0, -44, -4, -51); // Beak
     pop();
 
@@ -145,7 +155,7 @@ function bot() {
  //   var m = "orihegorhaepghrpiuehtgiuhreipguhrpiuehagpiuhipgurhapiudfhgipuahfgiuhraeiuhgrgytghiuqabeqrgiupabgfiuygareiupghareiuphgiuaprehgpiuahgiuprhaepiguhafipudghiuphregiuhaiuhgriuhreaipuhgiupheraiughaieuphgfipuaerhgiuhareiupghiuraehgiuaerhgipuraehgiupreahgiupaheriupghaiuerhgiuarehgipreahgipuaerhgpiuaehrgpiuerahgipuheragpiuhreapiughpiageurhgipreuahgaeiruphgriuahgriuh";
     var m = "#TeacupGeneration recommends: " + this.crayonName1 + " " + this.crayonName2 + " with " + this.getTea() +" tea in a " + this.getGem() + " cup";
    if( this.movie !== undefined ) {
-      m += " while watching : " + this.movie;
+      m += " while watching: " + this.movie;
         this.have_drawn = true; 
     
    }
