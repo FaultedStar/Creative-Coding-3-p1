@@ -3,33 +3,49 @@
  * size is the number of pixels for width and height
  * use p5.js to draw a round grawscale glpyh within the bounding box
  */ 
+
+ // canvasWidth = 960;
+//var canvasHeight = 500;
+
 function glyph4(values, size) {
 
   //balls
   //size change
-  var color1 = map(values[0], 0, 100, 10, 70)
+ // var color1 = map(values[0], 0, 100, 10, 70)
+ var x, y;
+ x=size/2;
+ y=size/2;
+
+
+ var color1 = map(values[1], 0, 100, 20, 240)-30;
   stroke(color1);
-  fill(color1)
-  var s2 = size/2;
-  ellipse(s2/2, s2, size/2);
-  ellipse(s2/2+s2, s2, size/2);
+  fill(color1);
+  var ballSize = map(values[0],0, 100, 50,150);
+  ellipse(x/2+(ballSize/6),y, ballSize/2);
+  ellipse(x/2*3-(ballSize/6),y, ballSize/2);
 
 
 //penis
   //length change
   //width change
-
-  var inner_size = 0.2 + 0.4 * values[2] / 100.0;
-  var s3 = size * inner_size;
-
-  var color2 = map(values[1], 0, 100, color1+20, 240)
+  //penis colour
+var color2 = map(values[1], 0, 100, 20, 240)
   fill(color2);
   stroke(color2);
 
-  var shift_frac = (values[3] - 50.0) / 50.0;
-  var max_shift = 0.5 * (size - s3);
-  var x_shift = shift_frac * max_shift;
-  ellipse(s2, s2+s3, s3+x_shift, s3*3);  
+    var max_length = size-20 ;
+  var length = map(values[2], 0,100, 50,max_length);
+  //var s3 = length;
+
+  var width = map(values[3], 0 , 100, 15,70)*length/100;
+
+//ellipse(x,y+length/3,width,length);
+    rect(x-width/2,y,width,length,30);
+
+    stroke(color1);
+     fill(color1);
+    rect(x-width/2,y+length/1.6,width+width/5,width+width/5,30);
+  
 }
 
 /*
