@@ -44,7 +44,7 @@ var color2 = map(values[1], 0, 100, 20, 240)
 
     stroke(color1);
      fill(color1);
-    rect(x-width/2,y+length/1.6,width+width/5,width+width/5,30);
+   // rect(x-width/2,y+length/1.6,width+width/5,width+width/5,30);
   
 }
 
